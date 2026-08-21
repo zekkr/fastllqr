@@ -1,0 +1,6 @@
+^\.github$
+^\.git$
+^\.gitignore$
+^README\.md$
+^LICENSE\.md$
+^\.Makevars\.local$

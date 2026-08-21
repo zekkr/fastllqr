@@ -1,0 +1,4 @@
+useDynLib(fastllqr, .registration = TRUE, .fixes = "C_")
+
+export(llqr_seq_ppro)
+export(tvcqr_seq_ppro)

@@ -1,0 +1,26 @@
+Package: fastllqr
+Type: Package
+Title: Fast Screened Local Linear Quantile Regression
+Version: 0.1.0
+Authors@R: c(
+    person("Erkang", "Zhu", email = "zek24@mails.tsinghua.edu.cn", role = c("aut", "cre")),
+    person("Tianying", "Wang", role = "aut"),
+    person("Weichi", "Wu", role = "aut")
+  )
+Description: Fortran-backed exact screened warm-start solvers for
+    one-dimensional local linear quantile regression and time-varying
+    coefficient quantile regression. Reduced problems are verified against
+    omitted observations, with an internal full-active recovery when a
+    screened problem cannot be certified.
+URL: https://github.com/zekkr/fastllqr
+BugReports: https://github.com/zekkr/fastllqr/issues
+License: GPL (>= 3)
+Encoding: UTF-8
+Depends: R (>= 4.1.0)
+Imports: KernSmooth
+Suggests:
+    quantreg,
+    testthat (>= 3.0.0)
+NeedsCompilation: yes
+Config/testthat/edition: 3
+RoxygenNote: 7.3.1
