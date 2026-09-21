@@ -12,7 +12,11 @@
 #' @param threshold_factor Positive finite multiplier for the initial screening
 #'   threshold. The default is `0.1`.
 #'
+#' @param audit Run an additional full R-side rank and interpolation audit.
+#' @param diagnostics Append the interpolation indices and per-point solver diagnostics.
 #' @return A list containing `ll_est`, `d_ll_est`, `z`, and `h`.
+#' The `solver_info` attribute records backend and recovery/fallback status.
+#' With `diagnostics=TRUE`, an additional diagnostics element is returned.
 #' @export
 #'
 #' @examples
@@ -24,7 +28,9 @@
 #' head(fit$ll_est)
 llqr_seq_ppro <- function(x, y, tau = 0.5, z = NULL, h = NULL,
                           kernel = c("gaussian", "epanechnikov"),
-                          threshold_factor = 0.1) {
+                          threshold_factor = 0.1, audit = FALSE, diagnostics = FALSE) {
+  audit <- .u11_flag(audit, "audit")
+  diagnostics <- .u11_flag(diagnostics, "diagnostics")
   x <- .validate_numeric_vector(x, "x", min_length = 5L)
   y <- .validate_numeric_vector(y, "y", min_length = 5L)
   if (length(x) != length(y)) {
@@ -45,12 +51,13 @@ llqr_seq_ppro <- function(x, y, tau = 0.5, z = NULL, h = NULL,
 
   backend <- .llqr_backend(x, y, tau, z_sorted, h, kernel,
                            threshold_factor)
-  .certify_llqr_result(backend, x, y, z_sorted, h, kernel)
+  if (audit) .certify_llqr_result(backend, x, y, z_sorted, h, kernel)
 
-  list(
+  result <- list(
     ll_est = backend$ll_est[restore_index],
     d_ll_est = backend$d_ll_est[restore_index],
     z = z,
     h = h
   )
+  .u11_result(result, backend, diagnostics, restore_index, audit)
 }

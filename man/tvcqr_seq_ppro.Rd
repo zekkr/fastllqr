@@ -4,7 +4,15 @@
 \alias{tvcqr_seq_ppro}
 \title{Fast screened time-varying coefficient quantile regression}
 \usage{
-tvcqr_seq_ppro(x, y, tau = 0.5, h = NULL, threshold_factor = 1e-05)
+tvcqr_seq_ppro(
+  x,
+  y,
+  tau = 0.5,
+  h = NULL,
+  threshold_factor = 1e-05,
+  audit = FALSE,
+  diagnostics = FALSE
+)
 }
 \arguments{
 \item{x}{Finite numeric predictor matrix. Rows must be in time order.}
@@ -17,10 +25,16 @@ tvcqr_seq_ppro(x, y, tau = 0.5, h = NULL, threshold_factor = 1e-05)
 
 \item{threshold_factor}{Positive finite multiplier for the initial screening
 threshold. The default is `1e-5`.}
+
+\item{audit}{Run an additional full R-side rank and interpolation audit.}
+
+\item{diagnostics}{Append the interpolation indices and per-point solver diagnostics.}
 }
 \value{
 A list containing `theta_ll_est`, `beta_full_est`, `time_index`,
   and `h`.
+The `solver_info` attribute records backend and recovery/fallback status.
+With `diagnostics=TRUE`, an additional diagnostics element is returned.
 }
 \description{
 Fits time-varying coefficient quantile regression on the ordered grid

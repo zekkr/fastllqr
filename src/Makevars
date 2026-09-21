@@ -1,1 +1,6 @@
+PKG_FFLAGS = -ffree-line-length-none
+PKG_FCFLAGS = -ffree-line-length-none
 PKG_LIBS = $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
+OBJECTS = weighted_qr_core.o kernel_entry.o init.o
+all: $(SHLIB)
+kernel_entry.o: weighted_qr_core.o

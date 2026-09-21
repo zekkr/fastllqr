@@ -1,0 +1,14 @@
+[
+  {
+    "path": "src/fortran/u11/weighted_qr_core.f90",
+    "sha256": "6b522a189d3674b8f76bf578636e96fed2d43ac0cc803a36c657c412f632dde7",
+    "source_commit": "61dc4d6b39fab585ca62c590a7024fcc9eb95751",
+    "source_path": "experiments/hpc_u11_rep500/fortran/weighted_qr_core.f90"
+  },
+  {
+    "path": "src/fortran/u11/kernel_entry.f90",
+    "sha256": "21871b16e0a92ceda67267bf4bc810ba495ce087bb686612cfffcd09aa4f4e8c",
+    "source_commit": "61dc4d6b39fab585ca62c590a7024fcc9eb95751",
+    "source_path": "experiments/hpc_u11_rep500/fortran/kernel_entry.f90"
+  }
+]

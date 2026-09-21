@@ -1,7 +1,7 @@
 Package: fastllqr
 Type: Package
 Title: Fast Screened Local Linear Quantile Regression
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(
     person("Erkang", "Zhu", email = "zek24@mails.tsinghua.edu.cn", role = c("aut", "cre")),
     person("Tianying", "Wang", role = "aut"),

@@ -11,7 +11,9 @@ llqr_seq_ppro(
   z = NULL,
   h = NULL,
   kernel = c("gaussian", "epanechnikov"),
-  threshold_factor = 0.1
+  threshold_factor = 0.1,
+  audit = FALSE,
+  diagnostics = FALSE
 )
 }
 \arguments{
@@ -29,9 +31,15 @@ llqr_seq_ppro(
 
 \item{threshold_factor}{Positive finite multiplier for the initial screening
 threshold. The default is `0.1`.}
+
+\item{audit}{Run an additional full R-side rank and interpolation audit.}
+
+\item{diagnostics}{Append the interpolation indices and per-point solver diagnostics.}
 }
 \value{
 A list containing `ll_est`, `d_ll_est`, `z`, and `h`.
+The `solver_info` attribute records backend and recovery/fallback status.
+With `diagnostics=TRUE`, an additional diagnostics element is returned.
 }
 \description{
 Fits one-dimensional local linear quantile regression along an ordered

@@ -10,8 +10,12 @@
 #' @param threshold_factor Positive finite multiplier for the initial screening
 #'   threshold. The default is `1e-5`.
 #'
+#' @param audit Run an additional full R-side rank and interpolation audit.
+#' @param diagnostics Append the interpolation indices and per-point solver diagnostics.
 #' @return A list containing `theta_ll_est`, `beta_full_est`, `time_index`,
 #'   and `h`.
+#' The `solver_info` attribute records backend and recovery/fallback status.
+#' With `diagnostics=TRUE`, an additional diagnostics element is returned.
 #' @export
 #'
 #' @examples
@@ -23,7 +27,9 @@
 #' fit <- tvcqr_seq_ppro(x, y)
 #' head(fit$theta_ll_est)
 tvcqr_seq_ppro <- function(x, y, tau = 0.5, h = NULL,
-                           threshold_factor = 1e-5) {
+                           threshold_factor = 1e-5, audit = FALSE, diagnostics = FALSE) {
+  audit <- .u11_flag(audit, "audit")
+  diagnostics <- .u11_flag(diagnostics, "diagnostics")
   x <- .validate_tvcqr_x(x)
   y <- .validate_numeric_vector(y, "y")
   n <- nrow(x)
@@ -39,12 +45,13 @@ tvcqr_seq_ppro <- function(x, y, tau = 0.5, h = NULL,
   h <- .tvcqr_bandwidth(n, h)
 
   backend <- .tvcqr_backend(x, y, tau, h, threshold_factor)
-  .certify_tvcqr_result(backend, x, y, h)
+  if (audit) .certify_tvcqr_result(backend, x, y, h)
 
-  list(
+  result <- list(
     theta_ll_est = backend$theta_ll_est,
     beta_full_est = backend$beta_full_est,
     time_index = seq_len(n) / n,
     h = h
   )
+  .u11_result(result, backend, diagnostics, audit=audit)
 }
