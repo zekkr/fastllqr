@@ -7,7 +7,7 @@ regression. Version 0.2.0 uses the shared U11 weighted-quantile-regression core.
 R CMD INSTALL fastllqr_0.2.0.tar.gz
 ```
 
-After publication of the fixed GitHub release:
+Install the fixed GitHub release:
 
 ```r
 remotes::install_github("zekkr/fastllqr@v0.2.0")
@@ -45,5 +45,5 @@ not a retrospectively named package version. Public wrapper overhead and portabl
 compiler settings can make package timings differ from the archived timings.
 
 For the local macOS/Homebrew compiler workaround and precise validation coverage,
-see the reproduction documentation. The GitHub repositories were private at the
-2026-09-21 check; reader access and public release are separate pending steps.
+see the reproduction documentation. The package source and the matching research reproduction sources are available
+from the linked GitHub repositories.
